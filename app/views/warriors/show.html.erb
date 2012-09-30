@@ -1,0 +1,29 @@
+<%- model_class = Warrior -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @warrior.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:church) %>:</strong></dt>
+  <dd><%= @warrior.church %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
+  <dd><%= @warrior.phone %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:referrer) %>:</strong></dt>
+  <dd><%= @warrior.referrer %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:warrior_no) %>:</strong></dt>
+  <dd><%= @warrior.warrior_no %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              warriors_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_warrior_path(@warrior), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              warrior_path(@warrior),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>

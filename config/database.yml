@@ -27,7 +27,7 @@ test:
   reconnect: false
   database: ipc_pc_mgmt_test
   pool: 5
-  username: ipc_pc_mgmt
+  username: root
   password: karimbenzema
   socket: /var/run/mysqld/mysqld.sock
 
@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: ipc_pc_mgmt_development
   pool: 5
-  username: ipc_pc_mgmt
+  username: root
   password: karimbenzema
   socket: /var/run/mysqld/mysqld.sock

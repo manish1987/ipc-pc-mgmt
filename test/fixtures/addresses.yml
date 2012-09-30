@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  warrior_id: 1
+  addr_1: MyString
+  addr_1: MyString
+  city: MyString
+  pin_code: MyString
+  region_id: 1
+  country: MyString
+
+two:
+  warrior_id: 1
+  addr_1: MyString
+  addr_1: MyString
+  city: MyString
+  pin_code: MyString
+  region_id: 1
+  country: MyString

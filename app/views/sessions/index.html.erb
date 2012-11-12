@@ -1,0 +1,75 @@
+<%- model_class = Session -%>
+<div class="page-header">
+  <h2>Prayer Sessions</h2>
+</div>
+<div class="row">
+  <div class="span8">
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#todays_open" data-toggle="tab">Today's Open Sessions</a></li>
+        <li><a href="#tab2" data-toggle="tab">All Today's Sessions</a></li>
+        <li><a href="#all_open" data-toggle="tab">All Open Sessions</a></li>
+      </ul>
+      <div class="tab-content" id="sessions_tabs">
+        <div class="tab-pane active" id="todays_open">
+          <%= render :partial=>'sessions_list',:locals=>{:sessions=>@todays_open,:tab=>"todays_open"} %>
+        </div>
+        <div class="tab-pane" id="tab2">
+          <div id="todays_sessions">
+            <%= render :partial=>'sessions_list',:locals=>{:sessions=>@todays_sessions,:tab=>"todays_sessions"} %>
+          </div>
+        </div>
+        <div class="tab-pane" id="all_open">
+          <%= render :partial=>'sessions_list',:locals=>{:sessions=>@all_open,:tab=>"all_open"} %>
+        </div>
+      </div>
+    </div>
+    <hr>
+     <center> <%= link_to "View all Prayer Sessions",sessions_list_path,:class=>"btn span7 " %></center>
+
+  </div>
+
+</div>
+  <div class="row">
+    <div class="span4">
+      <hr>
+      <div class="well">
+        <h4>Statistics</h4>&nbsp;
+        <table class="table table-condensed">
+          <tr>
+            <td>Sessions Today</td>
+            <th><%= @no_sessions_today %></th>
+          </tr>
+          <tr>
+            <td>Sessions this Month</td>
+            <th><%= @sessions_month %></th>
+          </tr>
+          <tr>
+            <td>Prayer Hours clocked Today</td>
+            <th><%= @total_hours %></th>
+          </tr>
+        </table>
+        <%= link_to "Complete Stats",sessions_statistics_path,:class=>"btn btn-mini" %>
+      </div>
+    </div>
+    <div class="span4 pull-right">
+      <hr>
+      <div class="well">
+        <h4>Start New Session</h4><br>
+        <%= form_tag new_session_path, :class=>"form form-inline ",:method=>"get" do -%>
+            <p><select  data-placeholder="Choose Warrior" style="width:250px"  name="warrior" class="chzn-select">
+              <option value=""></option>
+              <% for region in @regions %>
+                <%= raw("<optgroup label='#{region.name}'>") %>
+                <% for warrior in region.warriors %>
+                  <%= raw("<option value='#{warrior.id}'>#{warrior.name} / #{warrior.warrior_no}</option>") %>
+                <%end%>
+                <%= raw("</optgroup>") %>
+              <%end%>
+            </select></p>
+
+            <%= submit_tag "Start Session", :class=>"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>

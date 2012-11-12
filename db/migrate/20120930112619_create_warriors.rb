@@ -5,7 +5,7 @@ class CreateWarriors < ActiveRecord::Migration
       t.string :church
       t.string :phone
       t.string :referrer
-      t.string :warrior_no
+      t.string :warrior_no, :unique=>true
 
       t.timestamps
     end

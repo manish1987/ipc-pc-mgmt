@@ -1,0 +1,76 @@
+
+
+<%- model_class = Session -%>
+<div class="page-header">
+  <h3>Prayer Session</h3>
+</div>
+<legend><%= link_to "#{@session.warrior.name}"+' / '+"#{@session.warrior.warrior_no}", warrior_path(@session.warrior.id) %></legend>
+<table class="table">
+  <tr>
+    <th align="center">Cabin Number</th><th align="center">Start Time</th><th align="center">End Time</th><th align="center">Session Time</th>
+  </tr>
+  <tr>
+    <td><h4><%=@session.cabin.cabin_no %></h3></t4>
+    <td><h4><%=pretty_date_time(@session.start) %></h4></td>
+    <td id="end_time"><% if @session.end %>
+          <h4><%= pretty_date_time((@session.end)) %></h4>
+        <% else %>
+          <%= link_to "End Session",url_for(:controller=>"sessions",:action=>"end_session",:session=>@session.id),:class=>"btn btn-inverse	 btn-large", :id=>"end_session" %>
+        <% end %>
+     </td>
+     <td valign="middle" id="total_time"><% if @session.end %>
+            <h4><%= pretty_hours(@session.total)  %></h4>
+          <%else%>
+            <span class="label label-info">In-progress</span>
+       <%end%>
+     </td>
+   </tr>
+
+</table>
+
+<hr>
+<% if !@feedback %>
+  <a href="#" class="btn btn-small btn-success" id="feedback-button">Add Feedback</a>
+  <div id="feedback-form" class="hidden">
+    <%= form_for Feedback.new, :html => { :class => 'form' } do |f| %>
+
+    <div class="control-group">
+      <p><strong>Feedback:</strong></p>
+      <div class="controls">
+        <%= f.text_area :feedback,:rows=>"4" %>
+      </div>
+    </div>
+    <%=f.hidden_field :session_id,:value=>@session.id %>
+    <%= f.submit nil,:class=>"btn btn-primary" %>&nbsp;&nbsp;&nbsp;<a href="#" class="btn" id="feedback-cancel">Cancel</a>
+    <%end%>
+  </div>
+<%else%>
+  <div id="feedback">
+    <h5>FEEDBACK</h5>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><%=@feedback.feedback%></font></p>
+  </div>
+<%end%>
+
+<div class="form-actions">
+  <%= link_to "Back",
+              :back, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_session_path(@session), :class => 'btn' %>
+  <%= link_to t('.delete', :default => t("helpers.links.destroy")),
+              session_path(@session),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>
+
+<script type="text/javascript">
+
+  $('#feedback-button').live("click",function(){
+    $('#feedback-form').removeAttr("class");
+    $('#feedback-button').attr("class","btn btn-small btn-success hidden");
+   });
+  $('#feedback-cancel').live("click",function(){
+    $('#feedback-button').attr("class","btn btn-small btn-success");
+    $('#feedback-form').attr("class","hidden");
+   });
+</script>

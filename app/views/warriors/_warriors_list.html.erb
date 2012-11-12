@@ -1,0 +1,31 @@
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th><%= sortable "name"%></th>
+      <th><%= sortable "warrior_no"%></th>
+      <th><%= sortable "church",nil%></th>
+      <th><%= "Phone" %></th>
+      <th>Region</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @warriors.each do |warrior| %>
+      <tr>
+        <td><%= warrior.name %></td>
+        <td><%= warrior.warrior_no %></td>
+        <td><%= warrior.church %></td>
+        <td><%= warrior.phone %></td>
+        <td><%= warrior.region.name %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      warrior_path(warrior),:method => :get, :class => 'btn btn-mini' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_warrior_path(warrior), :class => 'btn btn-mini' %>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @warriors,:renderer => BootstrapPagination::Rails %>

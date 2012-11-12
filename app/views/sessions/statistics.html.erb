@@ -1,0 +1,47 @@
+<%- model_class = Session -%>
+<div class="page-header">
+  <h3>Prayer Sessions Statistics</h3>
+</div>
+
+  <div class="input-append pull-left">
+    <%= form_tag sessions_statistics_path, :class=>"form form-inline",:method=>"get", :id=>"stats-daterange" do %>
+      <%= text_field_tag :daterange,"#{params[:daterange]}", :class=>"span3",:id=>"stats-daterange-input", :readonly=>"readonly"%>
+      <button  id="stats-reportrange" class="btn" type="button"><i class="icon-calendar icon-large"></i></button>
+      <%= submit_tag "Select Date(s)", :class=>"btn", :id=>"stats-date" %>
+    <% end %>
+  </div>
+<br><br><br>
+
+<legend>Statistics for <%if params[:daterange].nil? || params[:daterange]=="" %> <%= "Today" %><%else%>the selected date(s)<%end%>:</legend>
+<div id="stats">
+  <%= render 'statistics' %>
+</div>
+
+
+
+
+<hr>
+<%= link_to "Back", sessions_path, :class=>"btn" %>
+
+
+<script type="text/javascript">
+
+$('#stats-reportrange').daterangepicker(
+    {
+        ranges: {
+            'Today': ['today', 'today'],
+            'Yesterday': ['yesterday', 'yesterday'],
+            'Last 7 Days': [Date.today().add({ days: -6 }), 'today'],
+            'Last 30 Days': [Date.today().add({ days: -29 }), 'today'],
+            'This Month': [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()],
+            'Last Month': [Date.today().moveToFirstDayOfMonth().add({ months: -1 }), Date.today().moveToFirstDayOfMonth().add({ days: -1 })]
+        }
+    },
+    function(start, end) {
+        $('#stats-daterange-input').attr("value",start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
+    }
+);
+$(document).ready(function() {
+    $('.progress .bar').progressbar();
+});
+</script>

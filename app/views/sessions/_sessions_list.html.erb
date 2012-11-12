@@ -1,0 +1,24 @@
+<table class="table table-condensed table-bordered">
+            <tr>
+              <th><%= "Warrior" %></th>
+              <th><%= sortable "start","Date",nil,tab%></th>
+              <th><%= "Cabin" %></th>
+              <th><%= sortable "end","Status",nil,tab %></th>
+              <th></th>
+            </tr>
+            <% for session in sessions %>
+              <tr>
+                <td><%= session.warrior.name %></td>
+                <td><%= session.start.to_date.to_s(:long) %></td>
+                <td><%= session.cabin.cabin_no %></td>
+                <td><% if session.end.nil? %>
+                      <%= raw("<span class='label label-warning'>In-Progress</span>") %>
+                    <%else%>
+                      <%= raw("<span class='label label-success'>Completed</span>") %>
+                    <%end%>
+                </td>
+                <td><%= link_to "View",session_path(session),:class=>"btn btn-mini" %></td>
+              </tr>
+            <%end%>
+        </table>
+        <%= will_paginate sessions,:renderer => BootstrapPagination::Rails,:params=>{:tab=>tab} %>

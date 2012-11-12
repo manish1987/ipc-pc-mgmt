@@ -1,9 +1,9 @@
 class ChangeRegionCodeToInteger < ActiveRecord::Migration
   def up
-    change_column("regions","code",:string,:limit=>3)
+    change_column("regions","code",:string,:limit=>3,:unique=>true)
   end
 
   def down
-    change_colum("regions","code",:integer)
+    change_column("regions","code",:integer)
   end
 end

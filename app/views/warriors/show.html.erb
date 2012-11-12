@@ -1,21 +1,47 @@
 <%- model_class = Warrior -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h3>Prayer Warrior</h3>
 </div>
+<legend><strong><%= @warrior.name %></strong></legend>
+<table class="table table-striped">
+  <tr>
+  <th><strong><%= model_class.human_attribute_name(:warrior_no) %>:</strong></th>
+  <td><%= @warrior.warrior_no %></td>
+  </tr>
+    <tr>
+      <th rowspan="4">Address:</th>
+      <td><%= @warrior.address.addr_1 %></td>
+      <tr>
+        <td><%= @warrior.address.addr_2 %></td>
+      </tr>
+      <tr>
+        <td><%= @warrior.address.city %> | Pin-code: <%= @warrior.address.pin_code %> </td>
+      </tr>
+      <tr>
+        <td><%= @warrior.address.country %></td>
+      </tr>
+    </tr>
+  <tr>
+    <th><strong><%= model_class.human_attribute_name(:church) %>:</strong></th>
+    <td><%= @warrior.church %></td>
+  </tr>
+  <tr>
+  <th><strong><%= model_class.human_attribute_name(:phone) %>:</strong></th>
+  <td><%= @warrior.phone %></td>
+  </tr>
+  <tr>
+  <th><strong><%= model_class.human_attribute_name(:referrer) %>:</strong></th>
+  <td><%= @warrior.referrer %></td>
+  </tr>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @warrior.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:church) %>:</strong></dt>
-  <dd><%= @warrior.church %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
-  <dd><%= @warrior.phone %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:referrer) %>:</strong></dt>
-  <dd><%= @warrior.referrer %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:warrior_no) %>:</strong></dt>
-  <dd><%= @warrior.warrior_no %></dd>
-</dl>
-
+</table>
+<hr>
+<div class="well">
+  <h5>Prayer Sessions</h5>
+  <br>
+  <p><%= link_to "Start a new Session", new_session_path({:warrior=>@warrior.id}),:class=>"btn btn-primary" %>&nbsp;&nbsp;<%= link_to "View Sessions", url_for(:controller=>"sessions",:action=>"warrior_sessions",:warrior=>@warrior.id), :class=>"btn btn-primary" %></p>
+</div>
+<br>
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               warriors_path, :class => 'btn'  %>

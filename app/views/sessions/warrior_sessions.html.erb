@@ -1,0 +1,31 @@
+<script type="text/javascript">
+ $(document).on("focus", "[data-behaviour~='datepicker']", function(e){
+    $(this).datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true});
+});
+
+
+</script>
+
+
+<div class="page-header">
+  <h3>Prayer Sessions</h3>
+</div>
+<legend><%= link_to "#{@warrior.name}"+' / '+"#{@warrior.warrior_no}", warrior_path(@warrior.id) %></legend>
+<%= form_tag url_for(:controller=>:sessions,:action=>:warrior_sessions), :method => 'get',:class=>"form-search",:id=>"warrior_sessions_date" do %>
+       <input type="text" data-behaviour='datepicker' placeholder="Select a date" class="search-query" name="date" id="date"/>
+
+       <%= hidden_field_tag :warrior,@warrior.id %>
+       <%= hidden_field_tag :direction, sort_direction %>
+       <%= hidden_field_tag :sort, sort_column %>
+       <%=submit_tag "View Sessions",:class=>"btn"%>
+       <sub>Press without Selecting a date to Clear Filter</sub>
+<%end%>
+
+<div id="warrior_sessions">
+  <%= render 'warrior_sessions' %>
+</div>
+
+<div class="form-actions">
+<%= link_to "Back", warrior_url(@warrior), :class=>"btn"%>
+<%= link_to "Start a new Session", new_session_path({:warrior=>@warrior.id}),:class=>"btn btn-primary" %>
+</div>

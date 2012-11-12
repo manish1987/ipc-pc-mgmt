@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h3>Regional Statistics</h3>
+</div>
+
+<br>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Region</th>
+    <th>Prayer Warriors</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%for region in @regions %>
+    <tr>
+      <td><%= region.name+" / "+region.code %></td>
+      <td><%=region.warriors.length %></td>
+    </tr>
+  <%end%>
+  </tbody>
+</table>
+<hr>
+<%= link_to "Back",warriors_path,:class=>"btn" %>

@@ -1,0 +1,35 @@
+
+<div class="row">
+ <div class="span8">
+   <center> <h3><span class="text-error"><%= @statistics[:total_sessions] %></span> Sessions / Prayer time of <span class="text-error"><%= @statistics[:total_hours] %></span></h3></center>
+ </div>
+</div>
+<hr>
+<div class="row">
+  <div class="span4">
+    <table class="table table-condensed">
+      <legend>Daily Statistics</legend>
+      <tr>
+        <th>Date</th>
+        <th>Sessions</th>
+      </tr>
+      <% for date in @statistics[:dates_sessions] %>
+        <tr>
+          <td><%= date[0] %></td>
+          <td><%= date[1] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="span2 offset1">
+    <table class="table table-condensed">
+      <legend>Prayer Warriors</legend>
+      <% for warrior in @statistics[:warriors] %>
+        <tr>
+          <td><%=link_to warrior[0].name,warrior_path(warrior[0].id) %></td>
+        </tr>
+      <%end%>
+    </table>
+
+  </div>
+</div>

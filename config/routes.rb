@@ -1,4 +1,20 @@
 IpcPcMgmt::Application.routes.draw do
+
+  match 'warriors/list' => 'warriors#list'
+  match 'sessions/list' => 'sessions#list'
+  match 'sessions/end_session'=>'sessions#end_session'
+  match 'sessions/warrior_sessions'=>'sessions#warrior_sessions'
+  match 'sessions/statistics'=> 'sessions#statistics'
+  match 'warriors/regional_stats'=>'warriors#regional_stats'
+
+  resources :feedbacks
+
+  resources :sessions
+
+  resources :cabins
+
+
+
   resources :warriors do
     resources :address
   end
@@ -52,7 +68,7 @@ IpcPcMgmt::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  root :to => 'warriors#index'
 
   # See how all your routes lay out with "rake routes"
 

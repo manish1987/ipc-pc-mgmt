@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  warrior_id: 1
+  cabin_id: 1
+  start: 2012-10-27 16:56:48
+  end: 2012-10-27 16:56:48
+
+two:
+  warrior_id: 1
+  cabin_id: 1
+  start: 2012-10-27 16:56:48
+  end: 2012-10-27 16:56:48

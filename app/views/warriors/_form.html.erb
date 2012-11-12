@@ -2,37 +2,54 @@
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
+      <%= f.text_field :name, :class => 'text_field span4', :required=>"true" %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :church, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :church, :class => 'text_field' %>
+      <%= f.text_field :church, :class => 'text_field span4' %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :phone, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :phone, :class => 'text_field' %>
+      <%= f.text_field :phone, :class => 'text_field span4', :required=>"true" %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :referrer, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :referrer, :class => 'text_field' %>
+      <%= f.text_field :referrer, :class => 'text_field span4' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :warrior_no, :class => 'control-label' %>
+    <%= f.label :region_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :warrior_no, :class => 'text_field' %>
+      <%= f.select :region_id, options_from_collection_for_select(@regions, "id", "name") %>
     </div>
   </div>
 
+  <div class="control_group">
+    <%= f.fields_for :address do |form| %>
+      <%= form.label :address, :class => 'control-label' %>
+      <div class="controls controls-row">
+        <%= form.text_field :addr_1, :class=> 'text_field span4',:placeholder=>"Address Line 1" %>
+        <br><br>
+        <%= form.text_field :addr_2, :class=> 'text_field span4',:placeholder=>"Address Line 2" %>
+        <br><br>
+        <%= form.text_field :city, :class=> 'text_field span2',:placeholder=>"City" %>
+        <%= form.text_field :pin_code, :class=> 'text_field span2',:placeholder=>"Pin Code" %>
+        <br><br>
+        <%= form.text_field :country, :class=> 'text_field span3',:placeholder=>"Country" %>
+    <%end%>
+  </div>
+
+
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                warriors_path, :class => 'btn' %>
+    <%= link_to "Cancel",
+                :back,:id=>@warrior.id, :class => 'btn' %>
   </div>
 <% end %>

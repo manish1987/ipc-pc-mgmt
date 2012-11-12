@@ -1,0 +1,2 @@
+$("#end_time").html('<%= raw("<h4>#{pretty_date_time((@session.end))}</h4>") %>');
+$("#total_time").html('<%= raw("<h4>#{pretty_hours(@session.total) }</h4>") %>');

@@ -1,0 +1,17 @@
+<%= form_for @session, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <div class="control-group">
+    <%= f.label :cabin_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.collection_select :cabin_id, @cabins, :id, :pretty_cabin_name, :prompt => true %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :warrior_id, :value=>@warrior.id %>
+
+
+  <div class="form-actions">
+    <%= f.submit "Start Session", :class => 'btn btn-primary' %>
+    <%= link_to "Cancel",:back,:id=>@warrior.id, :class => 'btn' %>
+  </div>
+<% end %>

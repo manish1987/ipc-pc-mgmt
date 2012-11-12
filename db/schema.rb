@@ -11,11 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120930120355) do
+ActiveRecord::Schema.define(:version => 20121104152148) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "warrior_id"
     t.string   "addr_1"
+    t.string   "addr_2"
     t.string   "city"
     t.string   "pin_code"
     t.string   "country"
@@ -23,12 +24,47 @@ ActiveRecord::Schema.define(:version => 20120930120355) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "regions", :force => true do |t|
-    t.string  "name"
-    t.string  "code",        :limit => 3
-    t.integer "count"
-    t.string  "region_type", :limit => 15
+  create_table "cabins", :force => true do |t|
+    t.string   "cabin_no"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "district"
+    t.string   "state"
+    t.boolean  "vacant"
   end
+
+  create_table "feedbacks", :force => true do |t|
+    t.integer  "session_id"
+    t.text     "feedback"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "regions", :force => true do |t|
+    t.string   "name"
+    t.string   "code",        :limit => 3
+    t.integer  "count"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "region_type", :limit => 15
+    t.integer  "last_id"
+  end
+
+  add_index "regions", ["code"], :name => "index_regions_on_code"
+  add_index "regions", ["name"], :name => "index_regions_on_name"
+
+  create_table "sessions", :force => true do |t|
+    t.integer  "warrior_id"
+    t.integer  "cabin_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.float    "total"
+  end
+
+  add_index "sessions", ["start"], :name => "index_sessions_on_start"
+  add_index "sessions", ["warrior_id"], :name => "index_sessions_on_warrior_id"
 
   create_table "warriors", :force => true do |t|
     t.string   "name"

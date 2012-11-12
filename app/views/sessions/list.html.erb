@@ -1,0 +1,40 @@
+<%- model_class = Session -%>
+<div class="page-header">
+  <h3>Prayer Sessions</h3>
+</div>
+
+  <div class="input-append pull-left">
+    <%= form_tag url_for(:controller=>:sessions,:action=>:list), :class=>"form form-inline",:method=>"get", :id=>"sessions_daterange" do %>
+
+      <%= text_field_tag :daterange,"#{params[:daterange]}", :class=>"span3", :id=>"daterange", :readonly=>"readonly"%>
+      <button  id="reportrange" class="btn" type="button"><i class="icon-calendar icon-large"></i></button>
+      <%= submit_tag "Filter by Date", :class=>"btn" %>
+    <% end %>
+  </div>
+<br><hr>
+
+<div id="sessions_list">
+  <%= render(:partial=>'sessions_list',:locals=>{:sessions=>@sessions,:tab=>nil}) %>
+</div>
+
+<%= link_to raw("<i class=' icon-chevron-left'></i>&nbspBack") ,{:action=>'index'},:class=>"btn" %>
+
+
+
+<script type="text/javascript">
+$('#reportrange').daterangepicker(
+    {
+        ranges: {
+            'Today': ['today', 'today'],
+            'Yesterday': ['yesterday', 'yesterday'],
+            'Last 7 Days': [Date.today().add({ days: -6 }), 'today'],
+            'Last 30 Days': [Date.today().add({ days: -29 }), 'today'],
+            'This Month': [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()],
+            'Last Month': [Date.today().moveToFirstDayOfMonth().add({ months: -1 }), Date.today().moveToFirstDayOfMonth().add({ days: -1 })]
+        }
+    },
+    function(start, end) {
+        $('#daterange').attr("value",start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
+    }
+);
+</script>

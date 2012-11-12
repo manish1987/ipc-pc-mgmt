@@ -1,16 +1,26 @@
 class WarriorsController < ApplicationController
   # GET /warriors
   # GET /warriors.json
+  helper_method :sort_column, :sort_direction
 
   def index
-    regions=Regions.all
+    @regions=Region.all
   end
 
   def list
-    @warriors = Warrior.all
+    if params[:region]
+      @region=Region.find(params[:region])
+      @warriors = Warrior.where(:region_id=>@region.id)
+    else
+      @region=nil
+      @warriors=Warrior.scoped
+    end
+
+    @warriors = @warriors.search(params[:search]).order(sort_column+ ' ' + sort_direction).paginate(:per_page => 20, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js
       format.json { render json: @warriors }
     end
   end
@@ -30,6 +40,8 @@ class WarriorsController < ApplicationController
   # GET /warriors/new.json
   def new
     @warrior = Warrior.new
+    @warrior.build_address
+    @regions=Region.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +52,7 @@ class WarriorsController < ApplicationController
   # GET /warriors/1/edit
   def edit
     @warrior = Warrior.find(params[:id])
+    @regions=Region.all
   end
 
   # POST /warriors
@@ -79,10 +92,22 @@ class WarriorsController < ApplicationController
   def destroy
     @warrior = Warrior.find(params[:id])
     @warrior.destroy
-
     respond_to do |format|
       format.html { redirect_to warriors_url }
       format.json { head :no_content }
     end
+  end
+
+  def regional_stats
+    @regions=Region.all
+  end
+
+ private
+  def sort_column
+    params[:sort] || "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
   end
 end

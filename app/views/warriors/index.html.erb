@@ -1,44 +1,43 @@
-<%- model_class = Warrior -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+<div class="page-header"><h2>Prayer Warriors</h2></div>
+<div class="row">
+<div class="span3">
+<h4>View Prayer Warriors List:</h4>
+<br>
+<%= form_tag warriors_list_path, :class=>"form form-inline ",:method=>"get" do -%>
+      <p>
+      <select  data-placeholder="Choose Region" style="width:250px"  name="region" class="chzn-select">
+        <option value=""></option>
+        <% for region in @regions %>
+          <%= raw("<option value='#{region.id}'>#{region.name}</option>") %>
+        <%end%>
+      </select>
+      </p>
+      <%= submit_tag "View Prayer Warriors", :class=>"btn" %>
+<% end %>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:church) %></th>
-      <th><%= model_class.human_attribute_name(:phone) %></th>
-      <th><%= model_class.human_attribute_name(:referrer) %></th>
-      <th><%= model_class.human_attribute_name(:warrior_no) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @warriors.each do |warrior| %>
-      <tr>
-        <td><%= link_to warrior.id, warrior_path(warrior) %></td>
-        <td><%= warrior.name %></td>
-        <td><%= warrior.church %></td>
-        <td><%= warrior.phone %></td>
-        <td><%= warrior.referrer %></td>
-        <td><%= warrior.warrior_no %></td>
-        <td><%=l warrior.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_warrior_path(warrior), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      warrior_path(warrior),
-                      :method => :delete,
-                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="span3 pull-right">
+<h4>Search Prayer Warriors:</h4>
+<br>
+<%= form_tag url_for(:controller=>:warriors,:action=>:list), :method => 'get',:class=>"form-search",:id=>"warriors_search_index" do %>
+  <p>
+    <%= text_field_tag :search, params[:search],:class=>"input",:placeholder=>"Name / Phone / ID" %></p>
+    <%= submit_tag "Search", :name => nil,:class=>"btn" %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<% end %>
+
+</div>
+</div>
+
+<hr> <div class="row">
+<div class="span8">
+<%= link_to "New Prayer Warrior",
             new_warrior_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn btn-primary pull-left' %> &nbsp;&nbsp;
+<%= link_to "Regional Statistics",
+            warriors_regional_stats_path,
+            :class => 'btn ' %>
+</div></div>
+
+<br>
+<br>
+<br>

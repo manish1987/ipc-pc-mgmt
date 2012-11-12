@@ -1,0 +1,30 @@
+<%- model_class = Warrior -%>
+<div class="page-header">
+  <h3>Prayer Warriors<br><small><%= @region.name unless @region.nil?%></small></h3>
+</div>
+
+<div class="row">
+<div class="span3 pull-left"><h5>Totall Warriors: <%= @warriors.length %> </h5></div>
+<div class="span3 pull-right">
+<%= form_tag url_for(:controller=>:warriors,:action=>:list), :method => 'get',:class=>"form-search pull-right",:id=>"warriors_search" do %>
+
+    <%= text_field_tag :search, params[:search],:class=>"input-medium search-query", :placeholder=>"Name / Phone / ID" %>
+    <%= submit_tag "Search", :name => nil,:class=>"btn" %>
+    <%= hidden_field_tag :direction, sort_direction %>
+    <%= hidden_field_tag :sort, sort_column %>
+    <%= hidden_field_tag :region, @region.id unless @region.nil?%>
+<% end %>
+</div>
+</div>
+
+
+<div id="warriors">
+  <%= render 'warriors_list' %>
+
+</div>
+<div class="form-actions">
+<%= link_to "Back", url_for(:controller=>"warriors",:action=>"index"), :class=>"btn"%>
+<%= link_to "New Prayer Warrior",
+            new_warrior_path,
+            :class => 'btn btn btn-primary' %>
+</div>

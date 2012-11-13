@@ -67,7 +67,7 @@ class Session < ActiveRecord::Base
   end
 
   def self.sessions_month
-    sessions=Session.where("MONTH(start)=?",Date.today.month).length
+    sessions=Session.where("DATE(start) >= ? AND DATE(start) <= ?",Date.new(Date.today.year,Date.today.month,1).to_s,Date.new(Date.today.year,Date.today.month,-1).to_s).length
   end
 
   def self.between_dates(range)

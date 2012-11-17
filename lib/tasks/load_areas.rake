@@ -12,7 +12,7 @@ task :load_areas => [:environment] do
     else
       region_type="international"
     end
-    Region.create(:name=>regions[code],:code=>code,:count=>0,:region_type=>region_type)
+    Region.create(:name=>regions[code],:code=>code,:count=>0,:region_type=>region_type,:last_id=>0)
   end
   puts "Regions Loaded"
 end

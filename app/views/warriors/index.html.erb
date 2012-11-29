@@ -27,7 +27,30 @@
 
 </div>
 </div>
-
+<hr>
+<div class="row">
+<div class="span4">
+<h5>Prayer Warriors Scheduled to pray in coming days:</h5>
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#today" data-toggle="tab">Today</a></li>
+        <li><a href="#tomorrow" data-toggle="tab">Tomorrow</a></li>
+        <li><a href="#day_after" data-toggle="tab">Day after Tomorrow</a></li>
+      </ul>
+      <div class="tab-content" id="sessions_tabs">
+        <div class="tab-pane active" id="today">
+          <%= render :partial=>'warriors',:locals=>{:warriors=>@today} %>
+        </div>
+        <div class="tab-pane" id="tomorrow">
+          <%= render :partial=>'warriors',:locals=>{:warriors=>@tomorrow} %>
+        </div>
+        <div class="tab-pane" id="day_after">
+          <%= render :partial=>'warriors',:locals=>{:warriors=>@day_after} %>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
 <hr> <div class="row">
 <div class="span8">
 <%= link_to "New Prayer Warrior",

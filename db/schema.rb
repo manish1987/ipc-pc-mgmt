@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104152148) do
+ActiveRecord::Schema.define(:version => 20121128112633) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "warrior_id"
@@ -75,8 +75,10 @@ ActiveRecord::Schema.define(:version => 20121104152148) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "region_id"
+    t.integer  "commitment"
   end
 
+  add_index "warriors", ["commitment"], :name => "index_warriors_on_commitment"
   add_index "warriors", ["name"], :name => "index_warriors_on_name"
   add_index "warriors", ["region_id"], :name => "index_warriors_on_region_id"
 

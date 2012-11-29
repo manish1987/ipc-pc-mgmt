@@ -1,0 +1,16 @@
+<table class="table table-nonfluid">
+<tr>
+  <th>Name</th>
+  <th>Phone Number</th>
+</tr>
+<% if !warriors.nil? %>
+  <%for warrior in warriors %>
+    <tr>
+      <td><%=warrior.name%></td>
+      <td><%=warrior.phone%></td>
+    </tr>
+  <%end%>
+<%else%>
+  <tr><td colspan="2"> No Warriors Scheduled for Today</td></tr>
+<%end%>
+</table>

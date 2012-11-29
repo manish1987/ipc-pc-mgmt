@@ -26,10 +26,10 @@
   <div class="control-group">
     <%= f.label :region_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :region_id, options_from_collection_for_select(@regions, "id", "name") %>
+      <%= f.select :region_id, options_from_collection_for_select(@regions, "id", "name",:selected=>@warrior_region), { :style=>"width:250px"  ,:class=>"chzn-select"}%>
     </div>
   </div>
-
+  <hr>
   <div class="control_group">
     <%= f.fields_for :address do |form| %>
       <%= form.label :address, :class => 'control-label' %>
@@ -44,6 +44,23 @@
         <%= form.text_field :country, :class=> 'text_field span3',:placeholder=>"Country" %>
     <%end%>
   </div>
+  <hr>
+    <div class="control-group">
+    <%= f.label "Prayer Commitment", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :commitment,
+       options_for_select([["No Commitments",-1],
+                           ["Monthly",0],
+                           ["Every Sunday",1],
+                           ["Every Monday",2],
+                           ["Every Tuesday",3],
+                           ["Every Wednesday",4],
+                           ["Every Thursday",5],
+                           ["Every Friday",6],
+                           ["Every Saturday",7] ],:selected=>@warrior.commitment)
+      %>
+    </div>
+  </div>
 
 
 
@@ -53,3 +70,12 @@
                 :back,:id=>@warrior.id, :class => 'btn' %>
   </div>
 <% end %>
+
+<script>
+$(document).ready(function(){
+
+  $("#warrior_region_id").attr("class","chzn-select");
+  $("#warrior_region_id").attr("style","width:250px");
+  $("#warrior_region_id").attr("data-placeholder","Choose Region");
+});
+</script>

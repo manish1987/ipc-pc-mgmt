@@ -82,14 +82,19 @@ class SessionsController < ApplicationController
   # GET /sessions/new.json
   def new
     @session = Session.new
-    @warrior=Warrior.find(params[:warrior])
-    @session.warrior=@warrior
-    @cabins=Cabin.vacant_cabins
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @session }
+    if params[:warrior]==""
+      redirect_to sessions_path,alert: "Please select a prayer warrior!"
+    else
+      @warrior=Warrior.find(params[:warrior])
+      @session.warrior=@warrior
+      @cabins=Cabin.vacant_cabins
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @session }
+      end
     end
+
+
   end
 
   # GET /sessions/1/edit
@@ -127,8 +132,8 @@ class SessionsController < ApplicationController
         format.html { redirect_to @session, notice: 'Session was successfully ended.' }
         format.js
       else
-        format.html { redirect_to @session, notice: 'Session Ending Failed. Try Again!'  }
-        format.js { redirect_to @session, notice: 'Session Ending Failed. Try Again!'  }
+        format.html { redirect_to @session, alert: 'Session Ending Failed. Try Again!'  }
+        format.js { redirect_to @session, alert: 'Session Ending Failed. Try Again!'  }
       end
     end
   end

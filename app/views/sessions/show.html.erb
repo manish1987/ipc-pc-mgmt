@@ -52,8 +52,7 @@
 <%end%>
 
 <div class="form-actions">
-  <%= link_to "Back",
-              :back, :class => 'btn'  %>
+
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_session_path(@session), :class => 'btn' %>
   <%= link_to t('.delete', :default => t("helpers.links.destroy")),

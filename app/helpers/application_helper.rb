@@ -3,9 +3,9 @@ module ApplicationHelper
       title ||= column.titleize
       direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
       if direction=="desc"
-        arrow="<i class='icon-chevron-down'></i>"
-      else
         arrow="<i class='icon-chevron-up'></i>"
+      else
+        arrow="<i class='icon-chevron-down'></i>"
       end
 
       if column==sort_column

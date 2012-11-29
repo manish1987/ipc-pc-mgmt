@@ -5,10 +5,13 @@ class WarriorsController < ApplicationController
 
   def index
     @regions=Region.all
+    @today=Warrior.todays_warriors
+    @tomorrow=Warrior.tomorrows_warriors
+    @day_after=Warrior.day_after_tomorrows_warriors
   end
 
   def list
-    if params[:region]
+    if params[:region]!="" && !params[:region].nil?
       @region=Region.find(params[:region])
       @warriors = Warrior.where(:region_id=>@region.id)
     else
@@ -42,7 +45,7 @@ class WarriorsController < ApplicationController
     @warrior = Warrior.new
     @warrior.build_address
     @regions=Region.all
-
+    @warrior_region=nil
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @warrior }
@@ -53,6 +56,7 @@ class WarriorsController < ApplicationController
   def edit
     @warrior = Warrior.find(params[:id])
     @regions=Region.all
+    @warrior_region=@warrior.region.id
   end
 
   # POST /warriors

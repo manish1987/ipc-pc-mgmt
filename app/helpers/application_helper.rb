@@ -50,4 +50,14 @@ module ApplicationHelper
       return op
     end
 
+    def login_or_logout
+      # if current_admin
+      #   link_to 'Logout', destroy_admin_session_path
+      # else
+      #   ''
+      # end
+      ''
+    end
+
+
 end

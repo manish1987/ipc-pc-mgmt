@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: ipc_pc_mgmt_development
   pool: 5
-  username: ipc_pc_mgmt
-  password: karimbenzema
+  username: root
+  password: spritle
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +28,7 @@ test:
   database: ipc_pc_mgmt_test
   pool: 5
   username: root
-  password: karimbenzema
+  password: spritle
   socket: /var/run/mysqld/mysqld.sock
 
 production:
@@ -38,5 +38,5 @@ production:
   database: ipc_pc_mgmt_development
   pool: 5
   username: root
-  password: karimbenzema
+  password: spritle
   socket: /var/run/mysqld/mysqld.sock

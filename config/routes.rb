@@ -1,5 +1,6 @@
 IpcPcMgmt::Application.routes.draw do
 
+
   match 'warriors/list' => 'warriors#list'
   match 'sessions/list' => 'sessions#list'
   match 'sessions/end_session'=>'sessions#end_session'

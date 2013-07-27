@@ -1,6 +1,6 @@
 <div class="page-header"><h2>Prayer Warriors</h2></div>
 <div class="row">
-<div class="span3">
+<div class="span4">
 <h4>View Prayer Warriors List:</h4>
 <br>
 <%= form_tag warriors_list_path, :class=>"form form-inline ",:method=>"get" do -%>
@@ -15,7 +15,7 @@
       <%= submit_tag "View Prayer Warriors", :class=>"btn" %>
 <% end %>
 </div>
-<div class="span3 pull-right">
+<div class="span4 pull-right">
 <h4>Search Prayer Warriors:</h4>
 <br>
 <%= form_tag url_for(:controller=>:warriors,:action=>:list), :method => 'get',:class=>"form-search",:id=>"warriors_search_index" do %>
@@ -29,7 +29,7 @@
 </div>
 <hr>
 <div class="row">
-<div class="span4">
+<div class="span6 offset2">
 <h5>Prayer Warriors Scheduled to pray in coming days:</h5>
 <div class="tabbable"> <!-- Only required for left/right tabs -->
       <ul class="nav nav-tabs">
@@ -52,7 +52,7 @@
 </div>
 </div>
 <hr> <div class="row">
-<div class="span8">
+<div class="span6 offset2">
 <%= link_to "New Prayer Warrior",
             new_warrior_path,
             :class => 'btn btn btn-primary pull-left' %> &nbsp;&nbsp;

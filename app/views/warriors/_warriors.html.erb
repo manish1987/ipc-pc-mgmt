@@ -6,7 +6,7 @@
 <% if !warriors.nil? %>
   <%for warrior in warriors %>
     <tr>
-      <td><%=warrior.name%></td>
+      <td><%=link_to warrior.name, warrior_path(warrior) %></td>
       <td><%=warrior.phone%></td>
     </tr>
   <%end%>
